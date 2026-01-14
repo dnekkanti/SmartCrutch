@@ -259,71 +259,9 @@ const SmartCrutchDashboard = () => {
 
     // Simulate API call - replace with actual Arduino Cloud API
     setTimeout(() => {
-      const mockData = generateMockArduinoData(range);
       setIsLoading(false);
     }, 500);
   };
-
-  const generateMockArduinoData = (range) => {
-    const numPoints = range === '1hour' ? 12 : range === '1day' ? 24 : range === '2day' ? 48 : range === '7day' ? 168 : 720;
-    const now = new Date();
-
-    const generateTimeSeries = (baseValue, variance) => {
-      const times = [];
-      const values = [];
-
-      for (let i = numPoints; i >= 0; i--) {
-        const time = new Date(now - i * (range === '1hour' ? 300000 : 3600000));
-        times.push(time.toISOString());
-        values.push(baseValue + Math.random() * variance - variance / 2);
-      }
-
-      return { times, values };
-    };
-
-    return {
-      resp_version: 1,
-      responses: [
-        {
-          property_id: "left-force-id",
-          property_name: "leftForce",
-          property_type: "FLOAT",
-          ...generateTimeSeries(25, 20)
-        },
-        {
-          property_id: "right-force-id",
-          property_name: "rightForce",
-          property_type: "FLOAT",
-          ...generateTimeSeries(25, 20)
-        },
-        {
-          property_id: "step-count-id",
-          property_name: "stepCount",
-          property_type: "INT",
-          ...generateTimeSeries(500, 200)
-        },
-        {
-          property_id: "distance-id",
-          property_name: "distance",
-          property_type: "FLOAT",
-          ...generateTimeSeries(2, 1)
-        },
-        {
-          property_id: "left-accel-z-id",
-          property_name: "leftAccelZ",
-          property_type: "FLOAT",
-          ...generateTimeSeries(9.81, 2)
-        },
-        {
-          property_id: "right-accel-z-id",
-          property_name: "rightAccelZ",
-          property_type: "FLOAT",
-          ...generateTimeSeries(9.81, 2)
-        }
-      ]
-    };
-  };
-
 
   const formatTime = (date, range) => {
     if (range === '1hour') {
