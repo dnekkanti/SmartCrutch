@@ -367,21 +367,7 @@ cd arduino/firmware
 
 4. **Upload firmware to both crutches**
 
-5. **Backend Setup**
-```bash
-# Install dependencies
-cd backend
-npm install
-
-# Configure environment
-cp .env.example .env
-# Edit .env with your credentials
-
-# Start services
-docker-compose up -d
-```
-
-6. **Frontend Setup**
+5. **Frontend Setup**
 ```bash
 cd frontend
 npm install
